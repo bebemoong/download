@@ -41,9 +41,9 @@ body{margin:0;background:#fff;}
 <div id="container" class="event-container">
     
     <div class="btn-wrap">
-        <button onclick="changeImg('event.jpg', 1440)">1440 이미지</button>
-        <button onclick="changeImg('event_1920.jpg', 1920)">1920 이미지</button>
-        <button onclick="changeImg('event_2560.jpg', 2560)">2560 이미지</button>
+        <button onclick="changeImg('event.jpg',1440)">1440 이미지</button>
+        <button onclick="changeImg('event_1920.jpg',1920)">1920 이미지</button>
+        <button onclick="changeImg('event_2560.jpg',2560)">2560 이미지</button>
     </div>
     
     <img 
@@ -55,49 +55,26 @@ body{margin:0;background:#fff;}
 </div>
 
 <script>
-function applySize(width){
+const BASE_IMAGE = "event.jpg";
+const BASE_WIDTH = 1440;
+
+let currentImage = BASE_IMAGE;
+let currentWidth = BASE_WIDTH;
+
+function applyView(){
     const container = document.getElementById("container");
     const img = document.getElementById("mainImg");
 
-    // 모바일 환경
-    if(window.innerWidth <= 768){
+    const vw = window.innerWidth;
+
+    /* 모바일 */
+    if(vw <= 768){
         container.style.width = "100%";
+        img.src = BASE_IMAGE;
         img.style.width = "100%";
-        img.style.left = "0";
-        img.style.transform = "none";
-        img.style.position = "relative";
+        return;
     }
-    // PC 환경
-    else{
-        container.style.width = width + "px";
-        img.style.width = width + "px";
 
-        // 가운데 기준 유지 세팅
-        img.style.position = "relative";
-        img.style.margin = "0 auto";
-    }
-}
-
-function changeImg(imgSrc, width){
-    const img = document.getElementById("mainImg");
-    
-    img.src = imgSrc;
-
-    applySize(width);
-}
-
-/* 초기 로드 시 적용 */
-window.addEventListener('load', ()=>{
-    applySize(1440);
-});
-
-/* 화면 회전/리사이즈 대응 */
-window.addEventListener('resize', ()=>{
-    const img = document.getElementById("mainImg");
-    const currentWidth = img.style.width.replace("px","") || 1440;
-    applySize(currentWidth);
-});
-</script>
-
-</body>
-</html>
+    /* PC */
+    if(currentWidth > vw){
+        //
