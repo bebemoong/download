@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이미지</title>
+
+<style>
+body{margin:0;}
+
+.event-container{
+    width:1440px;
+    margin:0 auto;
+    position:relative;
+}
+
+.event-img{
+    width:1440px;
+    height:auto;
+    display:block;
+}
+
+/* 버튼 영역 */
+.btn-wrap{
+    text-align:center;
+    margin:20px 0;
+}
+
+.btn-wrap button{
+    padding:10px 18px;
+    margin:0 6px;
+    font-size:14px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="event-container">
+
+    <img 
+        id="mainImg"
+        src="event.jpg"
+        class="event-img"
+        alt="이벤트 이미지"
+    >
+
+    <!-- 버튼 -->
+    <div class="btn-wrap">
+        <button onclick="changeImg('event.jpg')">이미지 1</button>
+        <button onclick="changeImg('event_1920.jpg')">이미지 2</button>
+        <button onclick="changeImg('event_2560.jpg')">이미지 3</button>
+    </div>
+
+</div>
+
+<script>
+function changeImg(imgName){
+    document.getElementById("mainImg").src = imgName;
+}
+</script>
+
+</body>
+</html>
