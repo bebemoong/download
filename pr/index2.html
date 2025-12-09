@@ -37,19 +37,19 @@ body{margin:0;background:#fff;}
 <body>
 
 <div id="container" class="event-container">
-
+    
+    <div class="btn-wrap">
+        <button onclick="changeImg('event.jpg', 1440)">1440 이미지</button>
+        <button onclick="changeImg('event_1920.jpg', 1920)">1920 이미지</button>
+        <button onclick="changeImg('event_2560.jpg', 2560)">2560 이미지</button>
+    </div>
+    
     <img 
         id="mainImg"
         src="event.jpg"
         class="event-img"
         alt="이벤트 이미지"
     >
-
-    <div class="btn-wrap">
-        <button onclick="changeImg('event.jpg', 1440)">1440 이미지</button>
-        <button onclick="changeImg('event_1920.jpg', 1920)">1920 이미지</button>
-        <button onclick="changeImg('event_2560.jpg', 2560)">2560 이미지</button>
-    </div>
 </div>
 
 <script>
