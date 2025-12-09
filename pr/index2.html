@@ -77,4 +77,30 @@ function applyView(){
 
     /* PC */
     if(currentWidth > vw){
-        //
+        // 브라우저보다 이미지가 크면 자동으로 1440으로 전환
+        container.style.width = BASE_WIDTH + "px";
+        img.src = BASE_IMAGE;
+        img.style.width = BASE_WIDTH + "px";
+    }else{
+        // 선택한 이미지 그대로 유지
+        container.style.width = currentWidth + "px";
+        img.src = currentImage;
+        img.style.width = currentWidth + "px";
+    }
+}
+
+function changeImg(src,width){
+    currentImage = src;
+    currentWidth = width;
+    applyView();
+}
+
+/* 초기 로딩 */
+window.addEventListener("load", applyView);
+
+/* 화면 크기 변경 시 자동 반응 */
+window.addEventListener("resize", applyView);
+</script>
+
+</body>
+</html>
