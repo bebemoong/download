@@ -55,11 +55,13 @@ body{margin:0;background:#fff;}
 </div>
 
 <script>
-const BASE_IMAGE = "event.jpg";
-const BASE_WIDTH = 1440;
+const IMAGES = {
+    1440 : "event.jpg",
+    1920 : "event_1920.jpg",
+    2560 : "event_2560.jpg"
+};
 
-let currentImage = BASE_IMAGE;
-let currentWidth = BASE_WIDTH;
+let selectedWidth = 1440;
 
 function applyView(){
     const container = document.getElementById("container");
@@ -67,40 +69,41 @@ function applyView(){
 
     const vw = window.innerWidth;
 
-    /* 모바일 */
+    // 모바일
     if(vw <= 768){
         container.style.width = "100%";
-        img.src = BASE_IMAGE;
+        img.src = IMAGES[1440];
         img.style.width = "100%";
         return;
     }
 
-    /* PC */
-    if(currentWidth > vw){
-        // 브라우저보다 이미지가 크면 자동으로 1440으로 전환
-        container.style.width = BASE_WIDTH + "px";
-        img.src = BASE_IMAGE;
-        img.style.width = BASE_WIDTH + "px";
-    }else{
-        // 선택한 이미지 그대로 유지
-        container.style.width = currentWidth + "px";
-        img.src = currentImage;
-        img.style.width = currentWidth + "px";
+    let useWidth = selectedWidth;
+
+    // 단계별 다운스케일 처리
+    if(selectedWidth === 2560 && vw < 2560){
+        useWidth = 1920;
     }
+    if(useWidth === 1920 && vw < 1920){
+        useWidth = 1440;
+    }
+
+    container.style.width = useWidth + "px";
+    img.style.width = useWidth + "px";
+    img.src = IMAGES[useWidth];
 }
 
-function changeImg(src,width){
-    currentImage = src;
-    currentWidth = width;
+function changeImg(src, width){
+    selectedWidth = width;
     applyView();
 }
 
-/* 초기 로딩 */
+// 초기 로드
 window.addEventListener("load", applyView);
 
-/* 화면 크기 변경 시 자동 반응 */
+// 화면 리사이즈 대응
 window.addEventListener("resize", applyView);
 </script>
+
 
 </body>
 </html>
