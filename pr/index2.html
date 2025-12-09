@@ -6,21 +6,20 @@
 <title>이미지</title>
 
 <style>
-body{margin:0;}
+body{margin:0;background:#fff;}
 
 .event-container{
-    width:1440px;
     margin:0 auto;
     position:relative;
 }
 
+/* 기본 이미지 */
 .event-img{
-    width:1440px;
     height:auto;
     display:block;
 }
 
-/* 버튼 영역 */
+/* 버튼 */
 .btn-wrap{
     text-align:center;
     margin:20px 0;
@@ -37,7 +36,7 @@ body{margin:0;}
 
 <body>
 
-<div class="event-container">
+<div id="container" class="event-container">
 
     <img 
         id="mainImg"
@@ -46,18 +45,24 @@ body{margin:0;}
         alt="이벤트 이미지"
     >
 
-    <!-- 버튼 -->
     <div class="btn-wrap">
-        <button onclick="changeImg('event.jpg')">이미지 1</button>
-        <button onclick="changeImg('event_1920.jpg')">이미지 2</button>
-        <button onclick="changeImg('event_2560.jpg')">이미지 3</button>
+        <button onclick="changeImg('event.jpg', 1440)">1440 이미지</button>
+        <button onclick="changeImg('event_1920.jpg', 1920)">1920 이미지</button>
+        <button onclick="changeImg('event_2560.jpg', 2560)">2560 이미지</button>
     </div>
-
 </div>
 
 <script>
-function changeImg(imgName){
-    document.getElementById("mainImg").src = imgName;
+function changeImg(imgSrc, width){
+    const container = document.getElementById("container");
+    const img = document.getElementById("mainImg");
+
+    // 이미지 변경
+    img.src = imgSrc;
+
+    // 컨테이너 & 이미지 사이즈 변경
+    container.style.width = width + "px";
+    img.style.width = width + "px";
 }
 </script>
 
