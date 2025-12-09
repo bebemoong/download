@@ -11,6 +11,7 @@ body{margin:0;background:#fff;}
 .event-container{
     margin:0 auto;
     position:relative;
+    overflow:hidden;
 }
 
 /* 기본 이미지 */
@@ -54,17 +55,48 @@ body{margin:0;background:#fff;}
 </div>
 
 <script>
-function changeImg(imgSrc, width){
+function applySize(width){
     const container = document.getElementById("container");
     const img = document.getElementById("mainImg");
 
-    // 이미지 변경
+    // 모바일 환경
+    if(window.innerWidth <= 768){
+        container.style.width = "100%";
+        img.style.width = "100%";
+        img.style.left = "0";
+        img.style.transform = "none";
+        img.style.position = "relative";
+    }
+    // PC 환경
+    else{
+        container.style.width = width + "px";
+        img.style.width = width + "px";
+
+        // 가운데 기준 유지 세팅
+        img.style.position = "relative";
+        img.style.margin = "0 auto";
+    }
+}
+
+function changeImg(imgSrc, width){
+    const img = document.getElementById("mainImg");
+    
     img.src = imgSrc;
 
-    // 컨테이너 & 이미지 사이즈 변경
-    container.style.width = width + "px";
-    img.style.width = width + "px";
+    applySize(width);
 }
+
+/* 초기 로드 시 적용 */
+window.addEventListener('load', ()=>{
+    applySize(1440);
+});
+
+/* 화면 회전/리사이즈 대응 */
+window.addEventListener('resize', ()=>{
+    const img = document.getElementById("mainImg");
+    const currentWidth = img.style.width.replace("px","") || 1440;
+    applySize(currentWidth);
+});
 </script>
 
 </body>
